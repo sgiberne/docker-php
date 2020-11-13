@@ -1,0 +1,38 @@
+nginx:
+  image: nginx:1.19
+  restart: always
+  volumes:
+    - ./etc/nginx/templates:/etc/nginx/templates
+    - ../projects:/var/www
+  ports:
+    - 8080:80
+  links:
+    - php
+  environment:
+    - NGINX_HOST=myproject.local
+    - NGINX_PORT=80
+    - NGINX_ROOT=/var/www/myproject/public
+    - NGINX_PHP_VERSION=7.4
+
+php:
+  build: .
+  dockerfile: ./dokerfile/php7/php_7-4
+  restart: always
+  volumes:
+    - ../projects:/var/www
+    - ./etc/php:/usr/local/etc/php
+  links:
+    - mysql
+  working_dir: /var/www
+
+mysql:
+  image: mysql:8.0
+  restart: always
+  ports:
+    - 3306:3306
+  environment:
+    - MYSQL_USER=user
+    - MYSQL_PASSWORD=password
+    - MYSQL_ROOT_PASSWORD=password
+  volumes:
+    - ./databases/mysql:/var/lib/mysql
