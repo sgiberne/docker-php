@@ -1,10 +1,23 @@
-# Docker
+# PHP Stack built with docker compose
+
+A basic LAMP stack environment built using Docker Compose. It consists of the following:
 
 - PHP 7.4
-- Mysql
+- Nginx 1.19
+- MySQL 8.0
+- Composer (latest)
 
-./build.sh => build le docker
+# Installation
 
-./enter.sh => se connecte au container docker_php7_1
- 
-./remove.sh => supprimer tous les containers 
+- clone the repository
+```bash
+git clone https://github.com/sgiberne/docker-php.git
+```
+
+- configure the docker-composefile if needed
+
+- run
+```bash
+./build.sh
+```
+
