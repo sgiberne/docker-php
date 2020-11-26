@@ -8,6 +8,7 @@ nginx:
     - 8080:80
   links:
     - php
+    - redis
   environment:
     - NGINX_HOST=myproject.local
     - NGINX_PORT=80
@@ -23,6 +24,7 @@ php:
     - ./etc/php:/usr/local/etc/php
   links:
     - mysql
+    - redis
   working_dir: /var/www
 
 mysql:
@@ -36,3 +38,9 @@ mysql:
     - MYSQL_ROOT_PASSWORD=password
   volumes:
     - ./databases/mysql:/var/lib/mysql
+
+redis:
+  image: redis:alpine
+  hostname: redis
+  ports:
+    - 6379:6379

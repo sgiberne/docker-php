@@ -64,8 +64,11 @@ RUN apt-get update \
 
 # PECL
 RUN pecl install memcached; \
-	pecl install mcrypt-1.0.3; \
-	pecl install redis;
+	pecl install mcrypt-1.0.3;
+
+# REDIS
+RUN pecl install -o -f redis \
+    &&  docker-php-ext-enable redis
 
 # Install composer and put binary into $PATH
 RUN curl -sS https://getcomposer.org/installer | php \
