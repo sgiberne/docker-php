@@ -17,7 +17,7 @@ nginx:
 
 php:
   build: .
-  dockerfile: ./dokerfile/php7/php_7-4
+  dockerfile: ./dokerfile/php7/php
   restart: always
   volumes:
     - ../projects:/var/www
